@@ -1,0 +1,20 @@
+[
+{
+  "modid": "yafm",
+  "name": "Yet Another Furniture Mod",
+  "description": "Exactly what it says on the tin.",
+  "version": "a0.1",
+  "url": "github.com/BroSkylark/FurnitureMod",
+  "updateUrl": "",
+  "authorList": [
+    "BroSkylark"
+  ],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
