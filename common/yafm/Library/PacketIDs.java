@@ -1,4 +1,4 @@
-package yafm.Utility;
+package yafm.Library;
 
 public abstract class PacketIDs
 {

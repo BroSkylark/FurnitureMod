@@ -2,8 +2,8 @@ package yafm.Handler;
 
 import java.io.File;
 import java.util.logging.Level;
-import yafm.Utility.BlockIDs;
-import yafm.Utility.Reference;
+import yafm.Library.BlockIDs;
+import yafm.Library.Reference;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraftforge.common.Configuration;
 

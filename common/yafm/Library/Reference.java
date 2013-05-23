@@ -1,10 +1,10 @@
-package yafm.Utility;
+package yafm.Library;
 
 public abstract class Reference
 {
     public static final String MOD_ID = "yafm";
     public static final String MOD_NAME = "Yet Another Furniture Mod";
-    public static final String MOD_VERSION = "a0.1";
+    public static final String MOD_VERSION = "a0.2.2";
     public static final String MOD_DEPENDENCIES = "required-after:Forge@[7.8.0.703,);after:Thaumcraft";
     public static final String MOD_CHANNEL = MOD_ID;
 

@@ -7,7 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import yafm.Utility.PacketIDs;
+import yafm.Library.PacketIDs;
 import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 

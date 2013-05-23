@@ -1,7 +1,7 @@
 package yafm.Handler;
 
+import yafm.Library.Reference;
 import yafm.Packets.PacketYAFM;
-import yafm.Utility.Reference;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;

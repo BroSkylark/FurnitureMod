@@ -2,8 +2,9 @@ package yafm.Blocks;
 
 import java.util.List;
 import yafm.FurnitureMod;
+import yafm.Library.Reference;
+import yafm.Library.RenderIDs;
 import yafm.TileEntities.TileEntityToolRack;
-import yafm.Utility.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Facing;
@@ -41,6 +43,21 @@ public class BlockToolRack extends BlockContainer
         setBlockBounds(m == 5 ? 1 - f : 0, 0, m == 3 ? 1 - f : 0, m == 4 ? f : 1, 1, m == 2 ? f : 1);
     }
 
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int id, int meta)
+    {
+        TileEntityToolRack tetr = (TileEntityToolRack) world.getBlockTileEntity(x, y, z);
+        
+        for(int i = 0 ; i < TileEntityToolRack.TOOL_COUNT ; i++)
+        {
+            ItemStack is = tetr.getToolInSlot(i);
+            
+            if(is != null) dropBlockAsItem_do(world, x, y, z, is);
+        }
+        
+        super.breakBlock(world, x, y, z, id, meta);
+    }
+    
     @Override
     public void setBlockBoundsForItemRender()
     {
@@ -77,6 +94,8 @@ public class BlockToolRack extends BlockContainer
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7,
             float par8, float par9)
     {
+        if(player.isSneaking()) return false;
+        
         return ((TileEntityToolRack) world.getBlockTileEntity(x, y, z)).clickRack(player);
     }
 
@@ -84,15 +103,19 @@ public class BlockToolRack extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon(Reference.BLOCK_TOOLRACK_ICONID);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public Icon getIcon(int side, int meta)
     {
-        if(side == meta) return Block.bedrock.getIcon(side, 0);
-        return super.getIcon(side, meta);
+        return Block.planks.getIcon(side, 0);
+    }
+
+    @Override
+    public int getRenderType()
+    {
+        return RenderIDs.TE_TOOLRACK_ID;
     }
 
     @Override

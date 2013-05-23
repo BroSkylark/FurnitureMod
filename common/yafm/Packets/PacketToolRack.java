@@ -3,8 +3,8 @@ package yafm.Packets;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import yafm.FurnitureMod;
 import yafm.TileEntities.TileEntityToolRack;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -17,6 +17,7 @@ public class PacketToolRack extends PacketYAFM
     
     public PacketToolRack()
     {
+        super(true);
         data = new NBTTagCompound();
     }
     
@@ -25,14 +26,12 @@ public class PacketToolRack extends PacketYAFM
     @Override
     public void execute(INetworkManager manager, Player player)
     {
-        EntityPlayer p = (EntityPlayer) player;
         int x = data.getInteger("x"), y = data.getInteger("y"), z = data.getInteger("z");
-        TileEntity tetr = p.worldObj.getBlockTileEntity(x, y, z);
+        TileEntity tetr = FurnitureMod.proxy.getClientWorld().getBlockTileEntity(x, y, z);
         
         if(tetr != null)
         {
             tetr.readFromNBT(data);
-            p.worldObj.markBlockForUpdate(x, y, z);
         }
     }
     

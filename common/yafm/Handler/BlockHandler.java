@@ -1,11 +1,15 @@
 package yafm.Handler;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import yafm.Blocks.BlockBreaker;
 import yafm.Blocks.BlockToolRack;
+import yafm.Library.BlockIDs;
+import yafm.Library.Reference;
+import yafm.Library.RenderIDs;
+import yafm.Renderers.RendererToolRack;
 import yafm.TileEntities.TileEntityToolRack;
-import yafm.Utility.BlockIDs;
-import yafm.Utility.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,8 +46,18 @@ public class BlockHandler
         });
     }
     
+    public static void registerRenderingIDs()
+    {
+        RenderIDs.TE_TOOLRACK_ID = RenderingRegistry.getNextAvailableRenderId();
+    }
+    
+    public static void registerBlockRenderers()
+    {
+        RenderingRegistry.registerBlockHandler(new RendererToolRack());
+    }
+    
     public static void registerTileEntitySpecialRenderers()
     {
-        
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityToolRack.class, new RendererToolRack());
     }
 }

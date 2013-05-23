@@ -1,7 +1,7 @@
 package yafm.Handler;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import yafm.Utility.Reference;
+import yafm.Library.Reference;
 
 public class LocalizationHandler
 {

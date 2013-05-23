@@ -1,5 +1,6 @@
 package yafm.Proxy;
 
+import net.minecraft.world.World;
 import yafm.Handler.BlockHandler;
 
 public class CommonProxy
@@ -10,5 +11,10 @@ public class CommonProxy
         BlockHandler.registerBlocks();
         BlockHandler.registerTileEntities();
         BlockHandler.registerRecipes();
+    }
+    
+    public World getClientWorld()
+    {
+        return null;
     }
 }
