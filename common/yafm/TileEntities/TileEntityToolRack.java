@@ -41,7 +41,7 @@ public class TileEntityToolRack extends TileEntityDirectional
         {
             double d = getDirection().offsetX == 0 ? p.X() - xCoord : p.Z() - zCoord;
             if(getDirection().offsetX < 0 || getDirection().offsetZ > 0) d = 1 - d;
-            d = d * 0.333d + 0.333d;
+            d = d * 0.3333d + 0.3333d;
             boolean r = clickCompartiment(player, ((p.Y() < (yCoord + d)) ? 0 : 1));
 
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
