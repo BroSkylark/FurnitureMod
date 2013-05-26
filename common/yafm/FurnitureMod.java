@@ -35,7 +35,8 @@ public class FurnitureMod
     @SidedProxy(clientSide = Reference.PROXY_CLIENT_CLASS, serverSide = Reference.PROXY_SERVER_CLASS)
     public static CommonProxy proxy;
     
-    public static final CreativeTabs tabFurniture = new CreativeTabFurniture(CreativeTabs.getNextID(), Reference.MOD_ID);
+    public static final CreativeTabs tabFurniture = new CreativeTabFurniture(CreativeTabs.getNextID(), 
+            Reference.MOD_ID);
     
     @PreInit
     public void preInit(FMLPreInitializationEvent event)

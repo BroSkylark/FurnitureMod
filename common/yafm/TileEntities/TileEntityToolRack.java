@@ -6,15 +6,12 @@ import core.utils.Math.AnalyticGeometry.Plane;
 import core.utils.Math.AnalyticGeometry.Point;
 import core.utils.Math.AnalyticGeometry.Vector;
 import yafm.API.ToolRackRegistry;
-import yafm.Handler.PacketHandler;
-import yafm.Packets.PacketToolRack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityToolRack extends TileEntityDirectional
@@ -24,6 +21,7 @@ public class TileEntityToolRack extends TileEntityDirectional
 
     public TileEntityToolRack()
     {
+        super(true);
         tools = new ItemStack[TOOL_COUNT];
         plane = null;
     }
@@ -106,12 +104,6 @@ public class TileEntityToolRack extends TileEntityDirectional
     }
 
     @Override
-    public Packet getDescriptionPacket()
-    {
-        return PacketHandler.populatePacket((new PacketToolRack()).setData(this));
-    }
-
-    @Override
     public void saveInNBT(NBTTagCompound nbttagcompound)
     {
         for(int i = 0 ; i < TOOL_COUNT ; i++)
@@ -149,19 +141,6 @@ public class TileEntityToolRack extends TileEntityDirectional
         return super.setDirection(dir);
     }
 
-    private static boolean tryToAddToInventory(EntityPlayer p, ItemStack is)
-    {
-        if(p.getCurrentEquippedItem() == null)
-        {
-            p.inventory.setInventorySlotContents(p.inventory.currentItem, is);
-            return true;
-        }
-        else
-        {
-            return p.inventory.addItemStackToInventory(is);
-        }
-    }
-    
     private static boolean isSuitable(ItemStack is)
     {
         return is == null || ToolRackRegistry.isAcceptable(is.itemID) || is.getItem() instanceof ItemTool || 

@@ -2,6 +2,7 @@ package yafm.Blocks;
 
 import java.util.List;
 import yafm.FurnitureMod;
+import yafm.Handler.BlockHandler;
 import yafm.Library.Reference;
 import yafm.Library.RenderIDs;
 import yafm.TileEntities.TileEntityToolRack;
@@ -29,7 +30,7 @@ public class BlockToolRack extends BlockContainer
     {
         super(id, Material.wood);
         this.setUnlocalizedName(Reference.BLOCK_TOOLRACK_NAME);
-        this.setHardness(2F);
+        this.setHardness(1.5F);
         this.setCreativeTab(FurnitureMod.tabFurniture);
         this.setStepSound(soundWoodFootstep);
     }
@@ -48,7 +49,7 @@ public class BlockToolRack extends BlockContainer
     {
         TileEntityToolRack tetr = (TileEntityToolRack) world.getBlockTileEntity(x, y, z);
         
-        for(int i = 0 ; i < TileEntityToolRack.TOOL_COUNT ; i++)
+        for(int i = 0 ; tetr != null && i < TileEntityToolRack.TOOL_COUNT ; i++)
         {
             ItemStack is = tetr.getToolInSlot(i);
             
@@ -121,9 +122,10 @@ public class BlockToolRack extends BlockContainer
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int side)
     {
-        super.onNeighborBlockChange(world, x, y, z, side);
         if(!canBlockStay(world, x, y, z))
         {
+            dropBlockAsItem_do(world, x, y, z, new ItemStack(BlockHandler.toolRack));
+            breakBlock(world, x, y, z, BlockHandler.toolRack.blockID, world.getBlockMetadata(x, y, z));
             world.setBlockToAir(x, y, z);
         }
     }

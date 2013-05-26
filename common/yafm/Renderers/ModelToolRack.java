@@ -18,7 +18,7 @@ public class ModelToolRack extends ModelBase
         bars.rotationPointY = -1F;
     }
     
-    public void renderAll(float angle) { render(null, angle, 0, 0, 0, 0, 0.0625f); }
+    public void renderAll() { render(null, 0, 0, 0, 0, 0, 0.0625f); }
     
     @Override
     public void render(Entity e, float f1, float f2, float f3, float f4, float f5, float f6)

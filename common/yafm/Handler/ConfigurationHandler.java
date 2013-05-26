@@ -21,6 +21,8 @@ public class ConfigurationHandler
         {
             BlockIDs.BLOCK_TOOLRACK_ID = configuration.getBlock(Reference.BLOCK_TOOLRACK_NAME, 
                     BlockIDs.BlOCK_TOOLRACK_ID_DEFAULT).getInt(BlockIDs.BlOCK_TOOLRACK_ID_DEFAULT);
+            BlockIDs.BLOCK_POTIONSTAND_ID = configuration.getBlock(Reference.BLOCK_POTIONSTAND_NAME, 
+                    BlockIDs.BLOCK_POTIONSTAND_ID_DEFAULT).getInt(BlockIDs.BLOCK_POTIONSTAND_ID_DEFAULT);
         }
         catch(Exception e)
         {

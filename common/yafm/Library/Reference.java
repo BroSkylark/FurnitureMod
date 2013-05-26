@@ -14,8 +14,9 @@ public abstract class Reference
     public static final String ADDON_TC_ID = "Thaumcraft";
     
     public static final String BLOCK_TOOLRACK_NAME = "ToolRack";
-    public static final String BLOCK_TOOLRACK_ICONID = MOD_ID + ":" + BLOCK_TOOLRACK_NAME;
+    public static final String BLOCK_POTIONSTAND_NAME = "PotionStand";
     
+    public static final String TE_POTIONSTAND_NAME = "TE_PotionStand";
     public static final String TE_TOOLRACK_NAME = "TE_ToolRack";
 
     public static final int FLAG_BLOCKSET_NONE = 0;

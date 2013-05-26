@@ -3,7 +3,7 @@
 <properties version="1.0">
 	<comment>English (en_US) Localization File</comment>
 	<entry key="tile.ToolRack.name">Tool Rack</entry>
-	<entry key="tile.breaker.name">Block Breaker</entry>
+	<entry key="tile.PotionStand.name">Potion Stand</entry>
 	<entry key="itemGroup.yafm">Furniture</entry>
 </properties>
 

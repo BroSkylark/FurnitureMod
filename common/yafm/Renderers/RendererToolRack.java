@@ -42,7 +42,7 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
         if(isX) GL11.glRotatef(90F, 0, 1, 0);
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.TEXT_MODEL_TOOLRACK);
-        model.renderAll(0F);
+        model.renderAll();
 
         for(int i = 0 ; i < 2 ; i++)
         {
@@ -52,10 +52,10 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
             GL11.glPushMatrix();
 
             GL11.glTranslatef(i == 0 ?  f *  0.5f : -f * 0.5f, 
-                              i == 0 ? -f * 0.25f :  f * 0.25f, 
-                             -(d.offsetZ + d.offsetX) * f);
+                    i == 0 ? -f * 0.25f :  f * 0.25f, 
+                            -(d.offsetZ + d.offsetX) * f);
             GL11.glTranslated(0, i == 0 ? -0.25d : 0.25d, 0);
-            
+
             if((isX ? d.offsetX : d.offsetZ) < 0)
                 GL11.glRotatef(180, 0, 1, 0); 
             else
@@ -64,7 +64,7 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
             GL11.glTranslated(0, i == 0 ? f / 2 : -f / 2, 0);
             if(!(tool.getItem() instanceof ItemSword)) GL11.glTranslated(0, i == 0 ? f / 3 : -f / 3, 0);
             if(tool.getItem() instanceof ItemBow) GL11.glRotatef(180, 0, 0, 1);
-            
+
             if(ToolRackRegistry.isTool(tool.itemID))
             {
                 GL11.glRotatef(-45, 0, 0, 1);
@@ -74,24 +74,23 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
             {
                 GL11.glTranslated(i == 0 ? -f * 2 : f * 2, 0, 0);
             }
-            
-            renderItemStack2D(tool);
+
+            float scale = 0.75f;
+
+            if(!ToolRackRegistry.isTool(tool.itemID))
+            {
+                scale *= 0.625f;
+            }
+
+            renderItemStack2D(tool, scale);
             GL11.glPopMatrix();
         }
 
         GL11.glPopMatrix();
     }
 
-    private static void renderItemStack2D(ItemStack is)
+    public static void renderItemStack2D(ItemStack is, float f)
     {
-        float f = 0.75f;
-        
-        if(!ToolRackRegistry.isTool(is.itemID))
-        {
-            f *= 0.625f;
-        }
-        
-        Icon i = is.getIconIndex();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture("/gui/items.png");
 
         GL11.glPushMatrix();
@@ -99,15 +98,25 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
         GL11.glTranslated(-0.5d * f, -0.5d * f, 0.0625d * 0.5d);
         GL11.glScalef(f, f, f);
 
-        ItemRenderer.renderItemIn2D(Tessellator.instance, i.getMaxU(), i.getMinV(), i.getMinU(), i.getMaxV(), 
-                i.getSheetWidth(), i.getSheetHeight(), 0.0625F);
-        
+        for(int i = 0 ; i < 2 ; i++)
+        {
+            Icon ic = is.getItem().getIconFromDamageForRenderPass(is.getItemDamage(), i);
+
+            int c = is.getItem().getColorFromItemStack(is, i);
+            GL11.glColor3f(((c & 0xFF0000) >> 16) / 256F, ((c & 0x00FF00) >> 8) / 256F, (c & 0x0000FF) / 256F);
+
+            ItemRenderer.renderItemIn2D(Tessellator.instance, ic.getMaxU(), ic.getMinV(), ic.getMinU(), ic.getMaxV(), 
+                    ic.getSheetWidth(), ic.getSheetHeight(), 0.0625f);
+
+            if(!is.getItem().requiresMultipleRenderPasses()) break;
+        }
         if(is.hasEffect()) renderSpecialOverlay();
-        
+
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
     }
-    
+
     private static void renderSpecialOverlay()
     {
         Tessellator tessellator = Tessellator.instance;
@@ -133,6 +142,7 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
         GL11.glTranslatef(-f9, 0.0F, 0.0F);
         GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
         ItemRenderer.renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
         GL11.glPopMatrix();
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glDisable(GL11.GL_BLEND);

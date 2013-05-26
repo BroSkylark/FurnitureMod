@@ -7,7 +7,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import yafm.Library.PacketIDs;
 import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 
@@ -80,6 +79,7 @@ public abstract class PacketYAFM
     {
     }
 
+    @SuppressWarnings("unused")
     private static void addMapping(Class<? extends PacketYAFM> c, int i)
     {
         nameToClass.put(Integer.valueOf(i), c);
@@ -132,7 +132,5 @@ public abstract class PacketYAFM
     {
         nameToClass = new HashMap<Integer, Class<? extends PacketYAFM>>();
         classToName = new HashMap<Class<? extends PacketYAFM>, Integer>();
-        
-        addMapping(PacketToolRack.class, PacketIDs.PACKET_TOOLRACK_ID);
     }
 }

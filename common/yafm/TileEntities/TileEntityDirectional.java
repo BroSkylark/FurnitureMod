@@ -1,16 +1,25 @@
 package yafm.TileEntities;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityDirectional extends TileEntity
 {
     private ForgeDirection direction;
+    private boolean needsUpdates;
     
-    public TileEntityDirectional()
+    public TileEntityDirectional() { this(false); }
+    public TileEntityDirectional(boolean updates)
     {
         direction = ForgeDirection.UNKNOWN;
+        needsUpdates = updates;
     }
 
     public TileEntityDirectional setDirection(int dir) { return setDirection(ForgeDirection.getOrientation(dir)); }
@@ -25,7 +34,23 @@ public class TileEntityDirectional extends TileEntity
     {
         return direction;
     }
+
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        if(!needsUpdates) return null;
+        
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        writeToNBT(nbttagcompound);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, -1, nbttagcompound);
+    }
     
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
+    {
+        readFromNBT(pkt.customParam1);
+    }
+
     @Override
     public final void writeToNBT(NBTTagCompound nbttagcompound)
     {
@@ -69,6 +94,61 @@ public class TileEntityDirectional extends TileEntity
         return String.format("TE_Dir(%d|%d|%d) Facing %s", xCoord, yCoord, zCoord, direction.toString());
     }
 
+    public static boolean tryToAddToInventory(EntityPlayer p, ItemStack is)
+    {
+        if(p.getCurrentEquippedItem() == null)
+        {
+            p.inventory.setInventorySlotContents(p.inventory.currentItem, is);
+            return true;
+        }
+        else
+        {
+            return p.inventory.addItemStackToInventory(is);
+        }
+    }
+    
+    public static NBTTagCompound saveItemStackInList(ItemStack is[])
+    {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        NBTTagList list = new NBTTagList();
+        
+        for(int i = 0 ; i < is.length ; i++)
+        {
+            if(is[i] == null) continue;
+            
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setCompoundTag(TAG_IS_D, is[i].writeToNBT(new NBTTagCompound()));
+            nbt.setInteger(TAG_IS_I, i);
+            list.appendTag(nbt);
+        }
+        
+        nbttagcompound.setInteger(TAG_IS_S, is.length);
+        nbttagcompound.setTag(TAG_IS_L, list);
+        
+        return nbttagcompound;
+    }
+    
+    public static ItemStack[] restoreItemStackFromList(NBTTagCompound nbttagcompound)
+    {
+        ItemStack is[] = new ItemStack[nbttagcompound.getInteger(TAG_IS_S)];
+        NBTTagList list = nbttagcompound.getTagList(TAG_IS_L);
+        
+        if(list != null)
+        {
+            for(int i = 0 ; i < list.tagCount() ; i++)
+            {
+                NBTTagCompound nbt = (NBTTagCompound) list.tagAt(i);
+                is[nbt.getInteger(TAG_IS_I)] = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag(TAG_IS_D));
+            }
+        }
+        
+        return is;
+    }
+    
     private static final String TAG_DATA = "_data";
     private static final String TAG_DIRECTION = "_dir";
+    private static final String TAG_IS_L = "_list";
+    private static final String TAG_IS_S = "_length";
+    private static final String TAG_IS_I = "_index";
+    private static final String TAG_IS_D = "_data";
 }
