@@ -8,6 +8,8 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityDirectional extends TileEntity
@@ -143,6 +145,47 @@ public class TileEntityDirectional extends TileEntity
         }
         
         return is;
+    }
+
+    public static int determineOrientation(World world, int i, int j, int k, EntityPlayer entityplayer)
+    {
+        if(MathHelper.abs((float)entityplayer.posX - (float)i) < 2.0F && 
+                MathHelper.abs((float)entityplayer.posZ - (float)k) < 2.0F)
+        {
+            double d = (entityplayer.posY + 1.82D) - (double)entityplayer.yOffset;
+            if(d - (double)j > 2D)
+            {
+                return 1;
+            }
+            if((double)j - d > 0.0D)
+            {
+                return 0;
+            }
+        }
+
+        int l = MathHelper.floor_double((double)((entityplayer.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+
+        if(l == 0)
+        {
+            return 2;
+        }
+
+        if(l == 1)
+        {
+            return 5;
+        }
+
+        if(l == 2)
+        {
+            return 3;
+        }
+
+        if(l == 3)
+        {
+            return 4;
+        }
+
+        return 0;
     }
     
     private static final String TAG_DATA = "_data";

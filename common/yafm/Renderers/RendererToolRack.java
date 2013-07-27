@@ -172,7 +172,7 @@ public class RendererToolRack extends TileEntitySpecialRenderer implements ISimp
     @Override
     public int getRenderId()
     {
-        return RenderIDs.TE_TOOLRACK_ID;
+        return RenderIDs.BLOCK_TOOLRACK_RENDER_ID;
     }
 
     private static final float D_ORI = 7F / 16F;

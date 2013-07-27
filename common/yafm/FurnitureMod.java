@@ -3,9 +3,9 @@ import java.io.File;
 import net.minecraft.creativetab.CreativeTabs;
 import yafm.CreativeTabs.CreativeTabFurniture;
 import yafm.Handler.ConfigurationHandler;
-import yafm.Handler.AddonHandler;
 import yafm.Handler.LocalizationHandler;
 import yafm.Handler.PacketHandler;
+import yafm.Handler.Addons.AddonHandler;
 import yafm.Library.Reference;
 import yafm.Proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -46,7 +46,11 @@ public class FurnitureMod
         ConfigurationHandler.execute(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator
                 + Reference.MOD_ID + File.separator + Reference.MOD_ID + ".cfg"));
         
+        proxy.handleItems();
         proxy.handleBlocks();
+        proxy.handleCrafting();
+        
+        AddonHandler.executePreInit();
     }
     
     @Init
@@ -57,6 +61,6 @@ public class FurnitureMod
     @PostInit
     public void postInit(FMLPostInitializationEvent event)
     {
-        AddonHandler.execute();
+        AddonHandler.executePostInit();
     }
 }

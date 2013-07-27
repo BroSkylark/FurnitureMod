@@ -116,7 +116,7 @@ public class BlockToolRack extends BlockContainer
     @Override
     public int getRenderType()
     {
-        return RenderIDs.TE_TOOLRACK_ID;
+        return RenderIDs.BLOCK_TOOLRACK_RENDER_ID;
     }
 
     @Override
