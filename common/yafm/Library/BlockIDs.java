@@ -1,6 +1,6 @@
 package yafm.Library;
 
-public class BlockIDs
+public final class BlockIDs
 {
     public static final int BlOCK_TOOLRACK_ID_DEFAULT = 420;
     public static final int BLOCK_POTIONSTAND_ID_DEFAULT = 421;
@@ -19,4 +19,6 @@ public class BlockIDs
     public static int BLOCK_SPIKESNORMAL_ID;
     public static int BLOCK_SPIKESPOISON_ID;
     public static int BLOCK_SPIKESDIAMOND_ID;
+    
+    private BlockIDs() {}
 }

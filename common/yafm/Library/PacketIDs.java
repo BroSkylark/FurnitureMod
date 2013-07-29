@@ -1,5 +1,6 @@
 package yafm.Library;
 
-public abstract class PacketIDs
+public final class PacketIDs
 {
+    private PacketIDs() {}
 }

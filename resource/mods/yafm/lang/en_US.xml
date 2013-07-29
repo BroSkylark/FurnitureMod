@@ -14,6 +14,10 @@
 	<entry key="item.Key.name">Key</entry>
 	<entry key="item.Lock.name">Lock</entry>
 	<entry key="item.LockNKey.name">Lock &amp; Key</entry>
+	<entry key="item.Bag.Big.name">Large Bag</entry>
+	<entry key="item.Bag.Small.name">Small Bag</entry>
 	<entry key="itemGroup.yafm">Furniture</entry>
+	<entry key="container.Bag.Big">Large Bag</entry>
+	<entry key="container.Bag.Small">Small Bag</entry>
 </properties>
 

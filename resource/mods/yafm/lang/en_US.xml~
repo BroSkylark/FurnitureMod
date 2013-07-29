@@ -7,11 +7,16 @@
 	<entry key="tile.MotionSensor.name">Motion Sensor</entry>
 	<entry key="tile.TrickGlass.name">Trick Glass</entry>
 	<entry key="tile.PassableGlass.name">Interdimentional Glass</entry>
-	<entry key="tile.Spikes.name">Spikes</entry>
+	<entry key="tile.Spikes_Normal.name">Spikes</entry>
+	<entry key="tile.Spikes_Poison.name">Poisonous Spikes</entry>
+	<entry key="tile.Spikes_Diamond.name">Reinforced Spikes</entry>
 	<entry key="item.KeyTemplate.name">Key Template</entry>
 	<entry key="item.Key.name">Key</entry>
 	<entry key="item.Lock.name">Lock</entry>
 	<entry key="item.LockNKey.name">Lock &amp; Key</entry>
+	<entry key="item.Bag.name">Bag</entry>
 	<entry key="itemGroup.yafm">Furniture</entry>
+	<entry key="container.Bag.Big">Large Bag</entry>
+	<entry key="container.Bag.Small">Small Bag</entry>
 </properties>
 

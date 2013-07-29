@@ -28,6 +28,8 @@ public class ConfigurationHandler
                     ItemIDs.ITEM_LOCK_ID_DEFAULT).getInt(ItemIDs.ITEM_LOCK_ID_DEFAULT);
             ItemIDs.ITEM_LOCKNKEY_ID = configuration.getItem(Reference.ITEM_LOCKNKEY_NAME, 
                     ItemIDs.ITEM_LOCKNKEY_ID_DEFAULT).getInt(ItemIDs.ITEM_LOCKNKEY_ID_DEFAULT);
+            ItemIDs.ITEM_BAG_ID = configuration.getItem(Reference.ITEM_BAG_NAME, 
+                    ItemIDs.ITEM_BAG_ID_DEFAULT).getInt(ItemIDs.ITEM_BAG_ID_DEFAULT);
             
             BlockIDs.BLOCK_TOOLRACK_ID = configuration.getBlock(Reference.BLOCK_TOOLRACK_NAME, 
                     BlockIDs.BlOCK_TOOLRACK_ID_DEFAULT).getInt(BlockIDs.BlOCK_TOOLRACK_ID_DEFAULT);

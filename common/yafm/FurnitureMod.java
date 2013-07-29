@@ -1,8 +1,11 @@
 package yafm;
 import java.io.File;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 import yafm.CreativeTabs.CreativeTabFurniture;
 import yafm.Handler.ConfigurationHandler;
+import yafm.Handler.ForgeHooksHandler;
+import yafm.Handler.GuiHandler;
 import yafm.Handler.LocalizationHandler;
 import yafm.Handler.PacketHandler;
 import yafm.Handler.Addons.AddonHandler;
@@ -18,6 +21,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(   modid = Reference.MOD_ID,
         name = Reference.MOD_NAME,
@@ -56,6 +60,9 @@ public class FurnitureMod
     @Init
     public void init(FMLInitializationEvent event)
     {
+        NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+        
+        MinecraftForge.EVENT_BUS.register(new ForgeHooksHandler());
     }
     
     @PostInit

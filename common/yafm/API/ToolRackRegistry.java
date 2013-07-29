@@ -2,6 +2,7 @@ package yafm.API;
 
 import java.util.ArrayList;
 import java.util.List;
+import yafm.Handler.ItemHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSword;
@@ -41,5 +42,6 @@ public abstract class ToolRackRegistry
         additionalTools.add(Item.bow.itemID);
         acceptableItems.add(Item.shears.itemID);
         acceptableItems.add(Item.flintAndSteel.itemID);
+        acceptableItems.add(ItemHandler.bag.itemID);
     }
 }
