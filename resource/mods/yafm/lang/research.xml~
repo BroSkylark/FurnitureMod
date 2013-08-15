@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<research>
+<project id="YAFM_RESEARCH_PassableGlass">
+<name>Interdimensional Glass</name>
+<popupText>Circumvent the physical restrictions of matter.</popupText>
+<longText>Interested in the spartial properties of the Eldritch, you wonder if it were possible to apply it on certain materials without fully shifting the outside this dimension...</longText>
+<page type="text">By only partially warping spacetime through the crystalline structure of glass you have created a material that is virtually intangable: anything solid will phase right through while light, liquids and gasses can properly interact with it.
+However, applying a redstone current grounds it in space and effectively nullifies its supernatural properties.
+</page>
+<page type="infusioncrafting">YAFM_CRAFT_PassableGlass</page>
+</project>
+
+<project id="YAFM_RESEARCH_Bag">
+<name>Bigger on the inside</name>
+<popupText>Exactly what it says on the tin.</popupText>
+<longText>During your work with a Hungry Chest you notice something interesting. Apparently part of its properties can be explained by the means of pocket dimensions. Now, if you could only utilize this knowledge somehow...</longText>
+<page type="text">Frustrated by the limitations regarding amount and mass of materials you can carry at all times, you experiment with pocket dimensions, trying to harness the sheer endless posibilities such technology can offer.
+But in the end you have to settle for the ability to slightly enhance the volume of your bags. Bummer.</page>
+<page type="infusioncrafting">YAFM_CRAFT_Bag</page>
+</project>
+</research>
+
